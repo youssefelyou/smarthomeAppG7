@@ -1,0 +1,5 @@
+<app-appareil *ngFor="let item of appareils;"
+              [appareilName]="item."
+              [appareilStatut]="item.statut" [id]="item.id" ></app-appareil>
+<button  class="btn btn-warning" [disabled]="isOk">Switch All On </button>
+<button  class="btn btn-warning" [disabled]="isOk">Switch All Off </button>
