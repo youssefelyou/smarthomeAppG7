@@ -7,7 +7,7 @@ import { AppareilComponent } from './appareil/appareil.component';
 import { ListAppareilComponent } from './list-appareil/list-appareil.component';
 import {FormsModule} from "@angular/forms";
 import {NgFor, NgIf} from "@angular/common";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -19,7 +19,8 @@ import {HttpClient} from "@angular/common/http";
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    NgIf,NgFor
+    NgIf,NgFor,
+    HttpClientModule
   ],
   providers: [HttpClient],
   bootstrap: [AppComponent]
