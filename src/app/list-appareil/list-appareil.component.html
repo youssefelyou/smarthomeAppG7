@@ -1,5 +1,15 @@
-<app-appareil *ngFor="let item of appareils;"
-              [appareilName]="item."
-              [appareilStatut]="item.statut" [id]="item.id" ></app-appareil>
-<button  class="btn btn-warning" [disabled]="isOk">Switch All On </button>
-<button  class="btn btn-warning" [disabled]="isOk">Switch All Off </button>
+<div class="card-container">
+    <div *ngFor="let app of appareils;" class="card" [className]="app.state" [id]="app.id">
+        <img class="card-img-top" [src]="getPhotoUrl(app)" alt="{{ app.label }}">
+        <div class="card-body">
+            <h5 class="card-title">{{ app.label }}</h5>
+            <p class="card-text">State: {{ app.state }}</p>
+            <label class="switch">
+                <input type="checkbox" [(ngModel)]="app.state" (Change)="updateAppareil(app)">
+                <span class="slider"></span>
+            </label>
+        </div>
+    </div>
+</div>
+<!--<button  class="btn btn-warning" [disabled]="isOk">Switch All On </button>-->
+<!--<button  class="btn btn-warning" [disabled]="isOk">Switch All Off </button>-->

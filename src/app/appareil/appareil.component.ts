@@ -7,22 +7,19 @@ import {AppareilService} from "../service/appareil.service";
   styleUrls: ['./appareil.component.css']
 })
 export class AppareilComponent {
-  @Input() id!:number;
-  @Input() appareilName: String = "Téléphone";
-  @Input() appareilStatut:String="On";
-  appareilAvatar:String="assets/images/avatar1.png"
+  // @Input() id!:number;
+  // @Input() appareilName: String = "Téléphone";
+  // @Input() appareilStatut:String="On";
+  // appareilAvatar:String="assets/images/avatar1.png"
 
   constructor(private service:AppareilService) {
   }
 
-  getColor():string{
-    if(this.appareilStatut=="On")
-      return "green";
-    else return "red"
-  }
+  // getColor():string{
+  //   if(this.appareilStatut=="On")
+  //     return "green";
+  //   else return "red"
+  // }
 
-  changeState():void{
-    this.service.switchState(this.id);
-  }
 
 }

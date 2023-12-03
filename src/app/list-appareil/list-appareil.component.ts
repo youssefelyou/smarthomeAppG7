@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AppareilComponent} from "../appareil/appareil.component";
 import {AppareilService} from "../service/appareil.service";
 import {Appareil} from "../model/Appareil";
+import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-list-appareil',
@@ -10,13 +11,45 @@ import {Appareil} from "../model/Appareil";
 })
 export class ListAppareilComponent implements OnInit{
   isOk:boolean=true;
-  appareils !:Appareil;
+  appareils: Appareil[] = [];
 
-  constructor(private service:AppareilService) {
-    setTimeout(()=>{
-      this.isOk=false
-    },5000)
+  constructor(private service:AppareilService,
+    private sanitizer: DomSanitizer) {}
+
+  ngOnInit(): void {
+    this.AllAppareils();
   }
+
+  AllAppareils(): void {
+    this.service.findAll().subscribe(
+        (data) => {
+          this.appareils = data;
+        },
+        (error) => {
+          console.error('Error:', error);
+        }
+    );
+  }
+
+  updateAppareil(appareil: Appareil): void {
+    const app: { id: number; state: boolean } = {
+      id: appareil.id,
+      state: appareil.state,
+    };
+    this.service.switchOn(appareil.id, app).subscribe(
+        () => {
+          console.log("succes");
+        },
+        (error) => {
+          console.error('Error :', error);
+        }
+    );
+  }
+
+    getPhotoUrl(app: Appareil): SafeResourceUrl {
+        const photoUrl = app.photo;
+        return this.sanitizer.bypassSecurityTrustResourceUrl(photoUrl);
+    }
 
 
   // switchonAll(){
@@ -27,9 +60,5 @@ export class ListAppareilComponent implements OnInit{
   //   this.service.switchAllOff();
   // }
 
-  ngOnInit(): void {
-    this.appareils=this.service.findAll().subscribe(data=>{
-          this.appareils = data;
-    })
-  }
+
 }

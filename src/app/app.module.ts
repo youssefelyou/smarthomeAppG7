@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { AppareilComponent } from './appareil/appareil.component';
 import { ListAppareilComponent } from './list-appareil/list-appareil.component';
 import {FormsModule} from "@angular/forms";
-import {NgFor, NgIf} from "@angular/common";
+import {NgFor, NgIf, NgOptimizedImage} from "@angular/common";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 
 @NgModule({
@@ -15,13 +15,13 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
     AppareilComponent,
     ListAppareilComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    NgIf,NgFor,
-    HttpClientModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        NgIf, NgFor,
+        HttpClientModule, NgOptimizedImage
+    ],
   providers: [HttpClient],
   bootstrap: [AppComponent]
 })
