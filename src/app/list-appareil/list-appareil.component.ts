@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {AppareilComponent} from "../appareil/appareil.component";
 import {AppareilService} from "../service/appareil.service";
 import {Appareil} from "../model/Appareil";
 import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
@@ -12,6 +11,8 @@ import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 export class ListAppareilComponent implements OnInit{
   isOk:boolean=true;
   appareils: Appareil[] = [];
+
+    appareilAvatar:String="assets/images/avatar1.png"
 
   constructor(private service:AppareilService,
     private sanitizer: DomSanitizer) {}
@@ -49,6 +50,17 @@ export class ListAppareilComponent implements OnInit{
     getPhotoUrl(app: Appareil): SafeResourceUrl {
         const photoUrl = app.photo;
         return this.sanitizer.bypassSecurityTrustResourceUrl(photoUrl);
+    }
+
+    switch_All(state: boolean): void {
+        this.service.switchAll(state).subscribe(
+            () => {
+                this.AllAppareils();
+            },
+            (error) => {
+                console.error(error);
+            }
+        );
     }
 
 

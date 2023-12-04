@@ -8,7 +8,6 @@ import {Observable} from "rxjs";
 })
 export class AppareilService {
 
-
   url="http://localhost:8080/api/appareil"
 
   constructor(private http:HttpClient) { }
@@ -26,8 +25,13 @@ export class AppareilService {
   }
 
   switchOn(id: number, appareil: { id: number; state: boolean }): Observable<Appareil>{
-    return this.http.put<Appareil>('${this.url}/switch/${id}',appareil)
+    return this.http.put<Appareil>(`${this.url}/switch/${id}`,appareil)
   }
+
+  switchAll(state:boolean): Observable<void> {
+    return this.http.get<void>(`${this.url}/switch/state/${state}`);
+  }
+
 
   // switchAllOn() {
   //   this.appareils.forEach(appareil => {
